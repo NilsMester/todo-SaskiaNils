@@ -3,13 +3,19 @@ import styled from 'styled-components/macro';
 import TodoList from './components/TodoList';
 import useTodos from './hooks/useTodos';
 import AddTodo from './components/AddTodo';
+import AddSearch from './components/AddSearch';
+
 
 export default function App() {
     const [todos, create, remove, advance] = useTodos();
 
     return (
         <Main>
-            <h1>Super Kanban Board </h1>
+            <header>
+                <h1>Super Kanban Board </h1>
+                <AddSearch />
+            </header>
+
             <AddTodo onAdd={create} />
             <Board>
                 <TodoList
