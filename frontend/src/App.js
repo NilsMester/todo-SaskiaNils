@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import styled from 'styled-components/macro';
 import TodoList from './components/TodoList';
 import useTodos from './hooks/useTodos';
@@ -8,31 +8,31 @@ import AddSearch from './components/AddSearch';
 
 export default function App() {
     const [todos, create, remove, advance] = useTodos();
-
+    const [searchParam, setSearchParam] = useState('');
+    const searchFilteredTodos = todos.filter((todo) => todo.description.includes(searchParam));
     return (
         <Main>
             <header>
                 <h1>Super Kanban Board </h1>
-                <AddSearch />
+                <AddSearch searchParam = {searchParam} setSearchParam = {setSearchParam}/>
+                <AddTodo onAdd={create} />
             </header>
-
-            <AddTodo onAdd={create} />
             <Board>
                 <TodoList
                     status="OPEN"
-                    todos={todos}
+                    todos={searchFilteredTodos}
                     onDelete={remove}
                     onAdvance={advance}
                 />
                 <TodoList
                     status="IN_PROGRESS"
-                    todos={todos}
+                    todos={searchFilteredTodos}
                     onDelete={remove}
                     onAdvance={advance}
                 />
                 <TodoList
                     status="DONE"
-                    todos={todos}
+                    todos={searchFilteredTodos}
                     onDelete={remove}
                     onAdvance={advance}
                 />

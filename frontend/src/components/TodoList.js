@@ -2,7 +2,7 @@ import React from 'react';
 import Todo from './Todo';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
-import searchParam from './AddSearch';
+
 
 TodoList.propTypes = {
     status: PropTypes.string.isRequired,
@@ -19,7 +19,6 @@ TodoList.propTypes = {
 
 export default function TodoList({ status, todos, onDelete, onAdvance }) {
     const filteredTodos = todos.filter((todo) => todo.status === status);
-    //const searchFilterdTodos = filterTodos.filter((todo)) =>  CONTAINS SEARCHPARAM);
     return (
         <StyledList>
             {filteredTodos.map((todo) => (
